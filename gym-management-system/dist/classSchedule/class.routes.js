@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const class_controller_1 = require("./class.controller");
+const authMiddleware_1 = require("../middleware/authMiddleware");
+const router = (0, express_1.Router)();
+router.get("/classes", authMiddleware_1.protect, class_controller_1.getClasses);
+router.post("/create-class", authMiddleware_1.protect, authMiddleware_1.adminOnly, class_controller_1.createClassSchedule);
+router.patch("/update-class/:id", authMiddleware_1.protect, authMiddleware_1.adminOnly, class_controller_1.updateClassSchedule);
+router.delete("/delete-class/:id", authMiddleware_1.protect, authMiddleware_1.adminOnly, class_controller_1.deleteClassSchedule);
+router.get("/single-class/:id", authMiddleware_1.protect, authMiddleware_1.adminOnly, class_controller_1.getClassScheduleById);
+exports.default = router;
